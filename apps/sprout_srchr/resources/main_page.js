@@ -2,6 +2,7 @@
 // Project:   SproutSrchr - mainPage
 // Copyright: ©2011 My Company, Inc.
 // ==========================================================================
+
 /*globals SproutSrchr Forms*/
 
 // This page describes the main user interface for your application.
@@ -11,79 +12,93 @@ SproutSrchr.mainPage = SC.Page.design({
 	// Add childViews to this pane for views to display immediately on page
 	// load.
 	mainPane: SC.MainPane.design({
-		childViews: 'formView searchView statusView'.w(),
 
-		formView: SC.View.design({
+		// formView is the top area where the user types his query
+		// searchView is the results area with history on the left and results on the right
+		// statusView is a status bar for user notices
+		childViews: 'form search status'.w(),
+
+		// the formView should include the logo on the left and text input + search
+		// button and checkboxes to pick sources
+		form: SC.View.design({
 			layout: { top: 0, left: 0, right: 0, height: 96},
-			childViews: 'logoView pickerView queryView checkView'.w(),
+			childViews: 'logo query sourcePicker'.w(),
 			anchorLocation: SC.ANCHOR_TOP,
 
-			logoView: SC.LabelView.design({
-				layout: { height: 20, left: 20, width: 200, centerY: 0},
-				controlSize: SC.LARGE_CONTROL_SIZE,
-				fontWeight: SC.BOLD_WEIGHT,
-				value: 'SRCHR'
+			// this will be the area for the title and/or logo
+			logo: SC.View.design({
+				layout: { height: 72, left: 30, width: 200, centerY: 0},
+				classNames: ["logo"],
 			}),
 
-			pickerView: SC.FormView.design({
-				layout: { height: 20, left: 220, centerX: 0, centerY: 0},
-				//childViews: "buttonsView testView".w(),
-				childViews: "buttonsView".w(),
+			// this will be the area where the user types a query and hit search
+			query: SC.FormView.design({
+				layout: { height: 36, left: 200, width: 800, top: 12},
+				childViews: "queryInput".w(),
 
-				buttonsView: SC.FormView.row(SC.SegmentedView.design({
-					allowsEmptySelection: YES,
-					allowsMultipleSelection: YES,
-					layout: { left: 0, width: 220, height: 24, centerY: 0},
-					align: SC.ALIGN_LEFT,
-					items: [
-						{ title: "Flickr", value: "flickr" },
-						{ title: "Yahoo!", value: "yahoo" },
-						{ title: "Upcoming", value: "upcoming" },
-						{ title: "Twitter", value: "twitter" }
-					],
-					itemTitleKey: "title", itemValueKey: "value",
-					value: null
-				})),
-			}),
+				queryInput: SC.FormView.row("", SC.View.design(SC.FlowedLayout, {
 
-			queryView: SC.FormView.design({
-				layout: { height: 20, left: 500, width: 200, centerY: 0},
-				childViews: "checkboxView1 checkboxView2".w(),
+					childViews: "textInput searchButton".w(),
 
-				checkboxView1: SC.CheckboxView.design({
-					layout: { height: 20, left: 500, width: 200, centerY: 0},
-					title: "Check 1",
-					controlSize: SC.SMALL_CONTROL_SIZE
-				}),
-				checkboxView2: SC.CheckboxView.design({
-					layout: { height: 20, left: 600, width: 200, centerY: 0},
-					title: "Check 2",
-					controlSize: SC.SMALL_CONTROL_SIZE
-				})
+					textInput: SC.TextFieldView.design({
+						layout: { width: 410, height: 24 },
+						classNames: ['search'],
+						value: "Search term"
+						//valueBinding: '...' // TODO: bind for history restor
+					}),
+
+					searchButton: SC.ButtonView.design({
+						//toolTip: "_Project".loc(),
+						layout: { width: 60, height: 24},
+						title: "Find it!",
+						//titleMinWidth: 37,
+						//hasIcon: YES,
+						//icon: 'search'
+						//action: 'openProjectPicker'
+					  })
+				}))
     		}),
 
-			checkView: SC.FormView.design({
-				layout: { height: 20, left: 700, width: 200, centerY: 0},
-				childViews: "checkboxView3 checkboxView4".w(),
+			// the list of sources to search from: this is a simple group of checkboxes
+			sourcePicker: SC.FormView.design({
+				layout: { height: 40, left: 220, width: 800, top: 56},
+				childViews: "sources".w(),
 
-				checkboxView3: SC.CheckboxView.design({
-					layout: { height: 20, left: 700, width: 200, centerY: 0},
-					title: "Check 3",
-					controlSize: SC.SMALL_CONTROL_SIZE
-				}),
-				checkboxView4: SC.CheckboxView.design({
-					layout: { height: 20, left: 800, width: 200, centerY: 0},
-					title: "Check 4",
-					controlSize: SC.SMALL_CONTROL_SIZE
-				})
-    		})
-		}),
+				sources: SC.FormView.row("",
+					SC.View.design(SC.FlowedLayout, {
+					childViews: "twitterCheckbox flickrCheckbox yahooCheckbox upcomingCheckbox".w(),
+					twitterCheckbox: SC.CheckboxView.design({
+						layout: { width: 70, height: 32},
+						title: "Twitter",
+						controlSize: SC.SMALL_CONTROL_SIZE
+					}),
+					flickrCheckbox: SC.CheckboxView.design({
+						layout: { width: 60, height: 32},
+						title: "Flickr",
+						controlSize: SC.SMALL_CONTROL_SIZE
+					}),
+					yahooCheckbox: SC.CheckboxView.design({
+						layout: { width: 110, height: 32},
+						title: "Yahoo! search",
+						controlSize: SC.SMALL_CONTROL_SIZE
+					}),
+					upcomingCheckbox: SC.CheckboxView.design({
+						layout: { width: 120, height: 32},
+						title: "Upcoming events",
+						controlSize: SC.SMALL_CONTROL_SIZE
+					})
+				}))
+			})
+   		}),
 
-		searchView: SC.View.design({
+		// this is the area of the app where we display recent searches on the left
+		// and results on the right
+		search: SC.View.design({
 			layout: { top: 97, left: 0, right: 0, height: 600},
-			childViews: 'recentsView resultsView'.w(),
+			childViews: 'recents results'.w(),
 
-			recentsView: SC.ScrollView.design({
+			// this is a simple list of recent searches
+			recents: SC.ScrollView.design({
 				hasHorizontalScroller: NO,
 				// Added this to get the borders, got the idea from the SC.TabView, is
 				// it the right way to do it?
@@ -95,7 +110,8 @@ SproutSrchr.mainPage = SC.Page.design({
 				})
 		    }),
 
-			resultsView: SC.TabView.design({
+			// this is an area that will contain the results for a give search
+			results: SC.TabView.design({
 				layout: { left: 220, width: 800, height: 500, top: 0 },
 				items: [ "Flickr", "Yahoo!", "Upcoming", "Twitter" ],
 				tabLocation: SC.TOP_LOCATION,
@@ -109,12 +125,12 @@ SproutSrchr.mainPage = SC.Page.design({
 			})
 		}),
 
-		statusView: SC.ToolbarView.design({
+		status: SC.ToolbarView.design({
 			layout: { bottom: 0, left: 0, right: 0, height: 36 },
-			childViews: 'statusView'.w(),
+			childViews: 'status'.w(),
 			anchorLocation: SC.ANCHOR_BOTTOM,
 
-			statusView: SC.LabelView.design({
+			status: SC.LabelView.design({
 				layout: { centerY: 0, right:10, left: 10, height:20 },
 				fontWeight: SC.BOLD_WEIGHT,
 				value: 'Status...'

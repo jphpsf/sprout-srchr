@@ -1,0 +1,7 @@
+/*
+ * This is to set a logo on our app
+ * TODO: make a logo :)
+ */
+div.sprout-srchr.logo {
+  background: static_url('resources/images/sproutcore.png') no-repeat;
+}

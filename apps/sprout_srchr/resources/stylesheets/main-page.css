@@ -1,0 +1,21 @@
+/*
+ * Inspired from the Welcome and Greenhouse apps, this will style the
+ * app background with a dark theme
+ */
+.sc-view.sc-main {
+  background: #262B32 static_url('resources/images/main-bg.png') repeat;
+}
+
+/*
+ * Inspired from the Greenhouse apps, this will style the bottom toolbar
+ * background with a dark theme
+ */
+.ace .toolbar {
+  background: static_url('resources/images/toolbar-bg.png') repeat-x;
+  border-bottom: none;
+  color: white;
+  text-shadow: 0 1px 0 #000;
+  line-height: 24px;
+  font-size: 13px;
+}
+
