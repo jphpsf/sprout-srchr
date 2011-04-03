@@ -122,7 +122,7 @@ SproutSrchr.mainPage = SC.Page.design({
 
 					// This is a computer property that will display a search term with the
 					// associated sources (see model)
-					contentValueKey: 'toString',
+					contentValueKey: 'shortString',
 
 					// This to allow deletion if user press delete key
 					canDeleteContent: YES,
@@ -157,7 +157,7 @@ SproutSrchr.mainPage = SC.Page.design({
 			status: SC.LabelView.design({
 				layout: { centerY: 0, right:10, left: 10, height:20 },
 				fontWeight: SC.BOLD_WEIGHT,
-				value: 'Status...'
+				valueBinding: 'SproutSrchr.statusController.notice'
 			}),
 		}),
 	})

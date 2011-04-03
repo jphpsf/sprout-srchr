@@ -62,7 +62,7 @@ SproutSrchr.searchController = SC.ArrayController.create(
 		this.selectObject(search);
 
 		// Start the search
-		// TODO
+		this.startSearch();
 
 		return YES;
 	},
@@ -80,9 +80,20 @@ SproutSrchr.searchController = SC.ArrayController.create(
 		this.set('searchOnYahoo',selected.get('sources')['yahoo']);
 
 		// Start the search
-		// TODO
+		this.startSearch();
 
 		return YES;
+	},
+
+	// Start a search on the currently selected item
+	startSearch: function() {
+
+		// Update the status bar
+		var selected=this.get('selection').get('firstObject');
+		SproutSrchr.statusController.set('notice',selected.get('longString'));
+
+		// Start the search
+		// TODO
 	},
 
 	// This handles the delete behavior when the user hits the delete key
