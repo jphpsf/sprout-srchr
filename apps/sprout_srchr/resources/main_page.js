@@ -136,15 +136,46 @@ SproutSrchr.mainPage = SC.Page.design({
 			// This is an area that will contain the results for a give search
 			results: SC.TabView.design({
 				layout: { left: 220, right: 20, bottom: 20, top: 0 },
-				items: [ 'Flickr', 'Yahoo!', 'Upcoming', 'Twitter' ],
+				itemTitleKey: 'tab',
+				itemValueKey: 'panel',
+				value: 'SproutSrchr.mainPage.mainPane.search.results.noResults',
+				items: [
+					{ tab: 'Flickr', panel: 'SproutSrchr.mainPage.mainPane.search.results.flickrResults' },
+					{ tab: 'Yahoo!', panel: 'SproutSrchr.mainPage.mainPane.search.results.yahooResults' },
+					{ tab: 'Upcoming', panel: 'SproutSrchr.mainPage.mainPane.search.results.upcomingResults' },
+					{ tab: 'Twitter', panel: 'SproutSrchr.mainPage.mainPane.search.results.twitterResults' },
+				],
 				tabLocation: SC.TOP_LOCATION,
-				contentView: SC.ScrollView.design({
-					hasHorizontalScroller: NO,
-					//layout: { left: 220, width: 460, bottom: 400, top: 13 },
-					backgroundColor: 'red',
-					contentView: SC.ListView.design({
-					})
+
+				noResults: SC.LabelView.design({
+					layout: { top: 0, right:0, left: 0, bottom:0 },
+					backgroundColor: 'white',
+					value: ' No results'
 				}),
+
+				yahooResults: SC.LabelView.design({
+					layout: { top: 0, right:0, left: 0, bottom:0 },
+					backgroundColor: 'white',
+					value: ' No results on Yahoo (NOT IMPLEMENTED)'
+				}),
+
+				flickrResults: SC.LabelView.design({
+					layout: { top: 0, right:0, left: 0, bottom:0 },
+					backgroundColor: 'white',
+					value: ' No results on Flickr (NOT IMPLEMENTED)'
+				}),
+
+				upcomingResults: SC.LabelView.design({
+					layout: { top: 0, right:0, left: 0, bottom:0 },
+					backgroundColor: 'white',
+					value: ' No results on Upcoming (NOT IMPLEMENTED)'
+				}),
+
+				twitterResults: SC.LabelView.design({
+					layout: { top: 0, right:0, left: 0, bottom:0 },
+					backgroundColor: 'white',
+					value: ' No results on Twitter (NOT IMPLEMENTED)'
+				})
 			})
 		}),
 
@@ -162,3 +193,4 @@ SproutSrchr.mainPage = SC.Page.design({
 		}),
 	})
 });
+
