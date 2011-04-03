@@ -27,64 +27,65 @@ SproutSrchr.mainPage = SC.Page.design({
 
 			// this will be the area for the title and/or logo
 			logo: SC.View.design({
-				layout: { height: 72, left: 30, width: 200, centerY: 0},
-				classNames: ["logo"],
+				layout: { height: 72, left: 10, width: 200, centerY: 0},
+				classNames: ['logo'],
 			}),
 
 			// this will be the area where the user types a query and hit search
 			query: SC.FormView.design({
 				layout: { height: 36, left: 200, width: 800, top: 12},
-				childViews: "queryInput".w(),
+				childViews: 'queryInput'.w(),
 
-				queryInput: SC.FormView.row("", SC.View.design(SC.FlowedLayout, {
+				queryInput: SC.FormView.row('', SC.View.design(SC.FlowedLayout, {
 
-					childViews: "textInput searchButton".w(),
+					childViews: 'searchBox searchButton'.w(),
 
-					textInput: SC.TextFieldView.design({
+					searchBox: SC.TextFieldView.design({
 						layout: { width: 410, height: 24 },
 						classNames: ['search'],
-						value: "Search term"
-						//valueBinding: '...' // TODO: bind for history restor
+						value: 'Search term',
+						hint: 'Type your search term here and press "Find it!"',
+						valueBinding: 'SproutSrchr.searchController.searchString'
 					}),
 
 					searchButton: SC.ButtonView.design({
-						//toolTip: "_Project".loc(),
+						toolTip: 'Click to search',
 						layout: { width: 60, height: 24},
-						title: "Find it!",
-						//titleMinWidth: 37,
+						title: 'Find it!',
 						//hasIcon: YES,
 						//icon: 'search'
-						//action: 'openProjectPicker'
-					  })
+						target: 'SproutSrchr.searchController',
+						action: 'findIt'
+					})
 				}))
     		}),
 
 			// the list of sources to search from: this is a simple group of checkboxes
 			sourcePicker: SC.FormView.design({
 				layout: { height: 40, left: 220, width: 800, top: 56},
-				childViews: "sources".w(),
+				childViews: 'sources'.w(),
 
-				sources: SC.FormView.row("",
+				sources: SC.FormView.row('',
 					SC.View.design(SC.FlowedLayout, {
-					childViews: "twitterCheckbox flickrCheckbox yahooCheckbox upcomingCheckbox".w(),
+					childViews: 'twitterCheckbox flickrCheckbox yahooCheckbox upcomingCheckbox'.w(),
 					twitterCheckbox: SC.CheckboxView.design({
 						layout: { width: 70, height: 32},
-						title: "Twitter",
+						title: 'Twitter',
 						controlSize: SC.SMALL_CONTROL_SIZE
 					}),
 					flickrCheckbox: SC.CheckboxView.design({
 						layout: { width: 60, height: 32},
-						title: "Flickr",
+						title: 'Flickr',
 						controlSize: SC.SMALL_CONTROL_SIZE
 					}),
 					yahooCheckbox: SC.CheckboxView.design({
 						layout: { width: 110, height: 32},
-						title: "Yahoo! search",
+						title: 'Yahoo! search',
 						controlSize: SC.SMALL_CONTROL_SIZE
 					}),
 					upcomingCheckbox: SC.CheckboxView.design({
 						layout: { width: 120, height: 32},
-						title: "Upcoming events",
+						title: 'Upcoming events',
 						controlSize: SC.SMALL_CONTROL_SIZE
 					})
 				}))
@@ -106,14 +107,19 @@ SproutSrchr.mainPage = SC.Page.design({
 				layout: { left: 20, width: 160, height: 485, top: 13 },
 				backgroundColor: 'white',
 				contentView: SC.ListView.design({
-
+					classNames: [ 'history' ],
+					contentBinding: 'SproutSrchr.searchController.arrangedObjects',
+					selectionBinding: 'SproutSrchr.searchController.selection',
+					contentValueKey: 'term',
+					canDeleteContent: YES,
+					rowHeight: 25,
 				})
 		    }),
 
 			// this is an area that will contain the results for a give search
 			results: SC.TabView.design({
 				layout: { left: 220, width: 800, height: 500, top: 0 },
-				items: [ "Flickr", "Yahoo!", "Upcoming", "Twitter" ],
+				items: [ 'Flickr', 'Yahoo!', 'Upcoming', 'Twitter' ],
 				tabLocation: SC.TOP_LOCATION,
 				contentView: SC.ScrollView.design({
 					hasHorizontalScroller: NO,

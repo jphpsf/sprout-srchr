@@ -19,3 +19,10 @@
   font-size: 13px;
 }
 
+/*
+ * History list view font size
+ */
+
+.history label {
+	font-size: 13px !important;
+}

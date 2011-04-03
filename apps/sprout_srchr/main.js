@@ -13,17 +13,19 @@
 //
 SproutSrchr.main = function main() {
 
-  // Step 1: Instantiate Your Views
-  // The default code here will make the mainPane for your application visible
-  // on screen.  If you app gets any level of complexity, you will probably 
-  // create multiple pages and panes.  
-  SproutSrchr.getPath('mainPage.mainPane').append() ;
+	// Step 1: Instantiate Your Views
+	// The default code here will make the mainPane for your application visible
+	// on screen.  If you app gets any level of complexity, you will probably
+	// create multiple pages and panes.
+	SproutSrchr.getPath('mainPage.mainPane').append() ;
 
-  // Step 2. Set the content property on your primary controller.
-  // This will make your app come alive!
+	// Step 2. Set the content property on your primary controller.
+	// This will make your app come alive!
+	var searches = SproutSrchr.store.find(SproutSrchr.Search);
+	SproutSrchr.searchController.set('content', searches);
 
-  // TODO: Set the content property on your primary controller
-  // ex: SproutSrchr.contactsController.set('content',SproutSrchr.contacts);
+	// TODO: Set the content property on your primary controller
+	// ex: SproutSrchr.contactsController.set('content',SproutSrchr.contacts);
 
 } ;
 
