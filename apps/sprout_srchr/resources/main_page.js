@@ -101,7 +101,7 @@ SproutSrchr.mainPage = SC.Page.design({
 		// This is the area of the app where we display recent searches on the left
 		// and results on the right
 		search: SC.View.design({
-			layout: { top: 97, left: 0, right: 0, height: 600},
+			layout: { top: 97, left: 0, right: 0, bottom: 36},
 			childViews: 'recents results'.w(),
 
 			// This is a simple list of recent searches
@@ -110,7 +110,7 @@ SproutSrchr.mainPage = SC.Page.design({
 				// Added this to get the borders, got the idea from the SC.TabView, is
 				// it the right way to do it?
 				renderDelegateName: 'wellRenderDelegate',
-				layout: { left: 20, width: 160, height: 485, top: 13 },
+				layout: { left: 20, width: 160, bottom: 20, top: 13 },
 				backgroundColor: 'white',
 				contentView: SC.ListView.design({
 					classNames: [ 'history' ],
@@ -135,12 +135,12 @@ SproutSrchr.mainPage = SC.Page.design({
 
 			// This is an area that will contain the results for a give search
 			results: SC.TabView.design({
-				layout: { left: 220, width: 800, height: 500, top: 0 },
+				layout: { left: 220, right: 20, bottom: 20, top: 0 },
 				items: [ 'Flickr', 'Yahoo!', 'Upcoming', 'Twitter' ],
 				tabLocation: SC.TOP_LOCATION,
 				contentView: SC.ScrollView.design({
 					hasHorizontalScroller: NO,
-					layout: { left: 220, width: 460, height: 400, top: 13 },
+					//layout: { left: 220, width: 460, bottom: 400, top: 13 },
 					backgroundColor: 'red',
 					contentView: SC.ListView.design({
 					})
