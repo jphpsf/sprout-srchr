@@ -28,7 +28,7 @@ SproutSrchr.searchController = SC.ArrayController.create(
 		term=this.get('searchString')
 
 		// Does the term already exists?
-		if (SproutSrchr.Search.storeKeysById()[term]) {
+		if (SproutSrchr.Search.storeKeyExists(term)) {
 
 			// The key exists, so retrieve the record to update it
 			search = SproutSrchr.store.find(SproutSrchr.Search, term);
