@@ -16,16 +16,29 @@ SproutSrchr.searchController = SC.ArrayController.create(
 	SC.CollectionViewDelegate,
 	/** @scope SproutSrchr.searchController.prototype */ {
 
+	// Properties used for value binding with the view
 	searchString: null,
+	searchOnTwitter: false,
+	searchOnYahoo: false,
+	searchOnUpcoming: false,
+	searchOnFlickr: false,
 
 	// This action handles the user clicking the 'Find it!' button
 	findIt: function() {
 
-		var term, search;
+		var term, search, sources;
 
 		// Retrieve the search term (the searchString property was automatically
 		// bound with the text input)
-		term=this.get('searchString')
+		term=this.get('searchString');
+
+		// Build the sources object
+		sources={
+			'twitter': this.get('searchOnTwitter'),
+			'flickr': this.get('searchOnFlickr'),
+			'upcoming': this.get('searchOnUpcoming'),
+			'yahoo': this.get('searchOnYahoo')
+		};
 
 		// Does the term already exists?
 		if (SproutSrchr.Search.storeKeyExists(term)) {
@@ -34,22 +47,40 @@ SproutSrchr.searchController = SC.ArrayController.create(
 			search = SproutSrchr.store.find(SproutSrchr.Search, term);
 
 			// Update the sources
-			search.set('sources', []);
+			search.set('sources', sources);
 
 		} else {
 
 			// Otherwise create a new record
 			search = SproutSrchr.store.createRecord(SproutSrchr.Search, {
 				'term': term,
-				'sources': []
+				'sources': sources
 			});
-
 		}
 
 		// Select new search term (this should trigger the search)
 		this.selectObject(search);
 
 		// Start the search
+		// TODO
+
+		return YES;
+	},
+
+	// This action handles the user double clicking on a recent search
+	loadRecent: function() {
+
+		var selected=this.get('selection').get('firstObject');
+
+		// Restore the recent search which just got selected
+		this.set('searchString',selected.get('term'));
+		this.set('searchOnTwitter',selected.get('sources')['twitter']);
+		this.set('searchOnFlickr',selected.get('sources')['flickr']);
+		this.set('searchOnUpcoming',selected.get('sources')['upcoming']);
+		this.set('searchOnYahoo',selected.get('sources')['yahoo']);
+
+		// Start the search
+		// TODO
 
 		return YES;
 	},

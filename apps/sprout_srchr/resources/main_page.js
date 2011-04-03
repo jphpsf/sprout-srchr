@@ -13,25 +13,25 @@ SproutSrchr.mainPage = SC.Page.design({
 	// load.
 	mainPane: SC.MainPane.design({
 
-		// formView is the top area where the user types his query
-		// searchView is the results area with history on the left and results on the right
-		// statusView is a status bar for user notices
+		// form is the top area where the user types his query
+		// search is the results area with history on the left and results on the right
+		// status is a status bar for user notices
 		childViews: 'form search status'.w(),
 
-		// the formView should include the logo on the left and text input + search
+		// The form should include the logo on the left and text input + search
 		// button and checkboxes to pick sources
 		form: SC.View.design({
 			layout: { top: 0, left: 0, right: 0, height: 96},
 			childViews: 'logo query sourcePicker'.w(),
 			anchorLocation: SC.ANCHOR_TOP,
 
-			// this will be the area for the title and/or logo
+			// This will be the area for the title and/or logo
 			logo: SC.View.design({
 				layout: { height: 72, left: 10, width: 200, centerY: 0},
 				classNames: ['logo'],
 			}),
 
-			// this will be the area where the user types a query and hit search
+			// This will be the area where the user types a query and hit search
 			query: SC.FormView.design({
 				layout: { height: 36, left: 200, width: 800, top: 12},
 				childViews: 'queryInput'.w(),
@@ -40,6 +40,7 @@ SproutSrchr.mainPage = SC.Page.design({
 
 					childViews: 'searchBox searchButton'.w(),
 
+					// This is our search text input
 					searchBox: SC.TextFieldView.design({
 						layout: { width: 410, height: 24 },
 						classNames: ['search'],
@@ -48,6 +49,7 @@ SproutSrchr.mainPage = SC.Page.design({
 						valueBinding: 'SproutSrchr.searchController.searchString'
 					}),
 
+					// This is the search button which on click will call SproutSrchr.searchController.findIt
 					searchButton: SC.ButtonView.design({
 						toolTip: 'Click to search',
 						layout: { width: 60, height: 24},
@@ -60,7 +62,7 @@ SproutSrchr.mainPage = SC.Page.design({
 				}))
     		}),
 
-			// the list of sources to search from: this is a simple group of checkboxes
+			// The list of sources to search from: this is a simple group of checkboxes
 			sourcePicker: SC.FormView.design({
 				layout: { height: 40, left: 220, width: 800, top: 56},
 				childViews: 'sources'.w(),
@@ -71,34 +73,38 @@ SproutSrchr.mainPage = SC.Page.design({
 					twitterCheckbox: SC.CheckboxView.design({
 						layout: { width: 70, height: 32},
 						title: 'Twitter',
-						controlSize: SC.SMALL_CONTROL_SIZE
+						controlSize: SC.SMALL_CONTROL_SIZE,
+						valueBinding: 'SproutSrchr.searchController.searchOnTwitter'
 					}),
 					flickrCheckbox: SC.CheckboxView.design({
 						layout: { width: 60, height: 32},
 						title: 'Flickr',
-						controlSize: SC.SMALL_CONTROL_SIZE
+						controlSize: SC.SMALL_CONTROL_SIZE,
+						valueBinding: 'SproutSrchr.searchController.searchOnFlickr'
 					}),
 					yahooCheckbox: SC.CheckboxView.design({
 						layout: { width: 110, height: 32},
 						title: 'Yahoo! search',
-						controlSize: SC.SMALL_CONTROL_SIZE
+						controlSize: SC.SMALL_CONTROL_SIZE,
+						valueBinding: 'SproutSrchr.searchController.searchOnYahoo'
 					}),
 					upcomingCheckbox: SC.CheckboxView.design({
 						layout: { width: 120, height: 32},
 						title: 'Upcoming events',
-						controlSize: SC.SMALL_CONTROL_SIZE
+						controlSize: SC.SMALL_CONTROL_SIZE,
+						valueBinding: 'SproutSrchr.searchController.searchOnUpcoming'
 					})
 				}))
 			})
    		}),
 
-		// this is the area of the app where we display recent searches on the left
+		// This is the area of the app where we display recent searches on the left
 		// and results on the right
 		search: SC.View.design({
 			layout: { top: 97, left: 0, right: 0, height: 600},
 			childViews: 'recents results'.w(),
 
-			// this is a simple list of recent searches
+			// This is a simple list of recent searches
 			recents: SC.ScrollView.design({
 				hasHorizontalScroller: NO,
 				// Added this to get the borders, got the idea from the SC.TabView, is
@@ -108,15 +114,26 @@ SproutSrchr.mainPage = SC.Page.design({
 				backgroundColor: 'white',
 				contentView: SC.ListView.design({
 					classNames: [ 'history' ],
+					rowHeight: 25,
+
+					// Bind to the search controller to get the content in
 					contentBinding: 'SproutSrchr.searchController.arrangedObjects',
 					selectionBinding: 'SproutSrchr.searchController.selection',
-					contentValueKey: 'term',
+
+					// This is a computer property that will display a search term with the
+					// associated sources (see model)
+					contentValueKey: 'toString',
+
+					// This to allow deletion if user press delete key
 					canDeleteContent: YES,
-					rowHeight: 25,
+
+					// On double click we need to use the target selection as our current search
+					target: 'SproutSrchr.searchController',
+					action: 'loadRecent'
 				})
 		    }),
 
-			// this is an area that will contain the results for a give search
+			// This is an area that will contain the results for a give search
 			results: SC.TabView.design({
 				layout: { left: 220, width: 800, height: 500, top: 0 },
 				items: [ 'Flickr', 'Yahoo!', 'Upcoming', 'Twitter' ],
@@ -131,6 +148,7 @@ SproutSrchr.mainPage = SC.Page.design({
 			})
 		}),
 
+		// This is a status bar in which we'll show notices to the user
 		status: SC.ToolbarView.design({
 			layout: { bottom: 0, left: 0, right: 0, height: 36 },
 			childViews: 'status'.w(),
