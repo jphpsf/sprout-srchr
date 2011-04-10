@@ -33,19 +33,7 @@ SproutSrchr.Search = SC.Record.extend(
 
 	// This is computed property used to display a search term with its selected sources
 	// (Example: "Foo Bar (Y,F)" for searching "Foo Bar" on Yahoo and Flickr
-	shortString: function() {
-		var sources=['twitter','yahoo','flickr','upcoming'], checked=[];
-		for (var i=sources.length; i--; i>=0) {
-			if (this.get('sources')[sources[i]]) {
-				checked.push(sources[i][0].toUpperCase());
-			}
-		}
-		return this.get('term')+' ('+checked.join(',')+')';
-	}.property('term', 'sources').cacheable(),
-
-	// This is computed property used to display a search term with its selected sources
-	// (Example: "Foo Bar (Y,F)" for searching "Foo Bar" on Yahoo and Flickr
-	longString: function() {
+	statusString: function() {
 		var sources=['twitter','yahoo','flickr','upcoming'], checked=[], last='';
 		for (var i=sources.length; i--; i>=0) {
 			if (this.get('sources')[sources[i]]) {

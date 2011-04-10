@@ -90,7 +90,7 @@ SproutSrchr.searchController = SC.ArrayController.create(
 
 		// Update the status bar
 		var selected=this.get('selection').get('firstObject');
-		SproutSrchr.statusController.set('notice',selected.get('longString'));
+		SproutSrchr.statusController.set('notice',selected.get('statusString'));
 
 		// Start the search
 		// TODO

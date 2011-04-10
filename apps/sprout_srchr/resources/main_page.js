@@ -116,13 +116,17 @@ SproutSrchr.mainPage = SC.Page.design({
 					classNames: [ 'history' ],
 					rowHeight: 25,
 
+					// Here we override the default list item rendering and create our own with a custom
+					// view SproutSrchr.SearchItemView (used sc-gen view)
+					exampleView: SproutSrchr.SearchItemView,
+
 					// Bind to the search controller to get the content in
 					contentBinding: 'SproutSrchr.searchController.arrangedObjects',
 					selectionBinding: 'SproutSrchr.searchController.selection',
 
 					// This is a computer property that will display a search term with the
 					// associated sources (see model)
-					contentValueKey: 'shortString',
+					contentValueKey: 'term',
 
 					// This to allow deletion if user press delete key
 					canDeleteContent: YES,
@@ -138,12 +142,13 @@ SproutSrchr.mainPage = SC.Page.design({
 				layout: { left: 220, right: 20, bottom: 20, top: 0 },
 				itemTitleKey: 'tab',
 				itemValueKey: 'panel',
+				itemIconKey: 'icon',
 				value: 'SproutSrchr.mainPage.mainPane.search.results.noResults',
 				items: [
-					{ tab: 'Flickr', panel: 'SproutSrchr.mainPage.mainPane.search.results.flickrResults' },
-					{ tab: 'Yahoo!', panel: 'SproutSrchr.mainPage.mainPane.search.results.yahooResults' },
-					{ tab: 'Upcoming', panel: 'SproutSrchr.mainPage.mainPane.search.results.upcomingResults' },
-					{ tab: 'Twitter', panel: 'SproutSrchr.mainPage.mainPane.search.results.twitterResults' },
+					{ tab: 'Flickr', icon: static_url('flickr-icon'), panel: 'SproutSrchr.mainPage.mainPane.search.results.flickrResults' },
+					{ tab: 'Yahoo!', icon: static_url('yahoo-icon'), panel: 'SproutSrchr.mainPage.mainPane.search.results.yahooResults' },
+					{ tab: 'Upcoming', icon: static_url('upcoming-icon'), panel: 'SproutSrchr.mainPage.mainPane.search.results.upcomingResults' },
+					{ tab: 'Twitter', icon: static_url('twitter-icon'), panel: 'SproutSrchr.mainPage.mainPane.search.results.twitterResults' },
 				],
 				tabLocation: SC.TOP_LOCATION,
 

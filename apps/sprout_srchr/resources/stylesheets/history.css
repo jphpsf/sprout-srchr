@@ -1,0 +1,20 @@
+/*
+ * History list view font size
+ */
+
+.history label {
+	font-size: 13px !important;
+}
+
+/**
+ * History list icons
+ */
+.history .has-source-icon {
+	margin-right: 4px;
+	padding-top: 4px;
+}
+
+.history .source-icon {
+	float:right;
+	margin-left: 3px;
+}
