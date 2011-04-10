@@ -27,13 +27,13 @@ SproutSrchr.mainPage = SC.Page.design({
 
 			// This will be the area for the title and/or logo
 			logo: SC.View.design({
-				layout: { height: 72, left: 10, width: 200, centerY: 0},
+				layout: { height: 36, left: 30, width: 210, top: 30},
 				classNames: ['logo'],
 			}),
 
 			// This will be the area where the user types a query and hit search
 			query: SC.FormView.design({
-				layout: { height: 36, left: 200, width: 800, top: 12},
+				layout: { height: 36, left: 210, width: 800, top: 12},
 				childViews: 'queryInput'.w(),
 
 				queryInput: SC.FormView.row('', SC.View.design(SC.FlowedLayout, {
@@ -64,7 +64,7 @@ SproutSrchr.mainPage = SC.Page.design({
 
 			// The list of sources to search from: this is a simple group of checkboxes
 			sourcePicker: SC.FormView.design({
-				layout: { height: 40, left: 220, width: 800, top: 56},
+				layout: { height: 40, left: 230, width: 800, top: 56},
 				childViews: 'sources'.w(),
 
 				sources: SC.FormView.row('',
@@ -110,7 +110,7 @@ SproutSrchr.mainPage = SC.Page.design({
 				// Added this to get the borders, got the idea from the SC.TabView, is
 				// it the right way to do it?
 				renderDelegateName: 'wellRenderDelegate',
-				layout: { left: 20, width: 160, bottom: 20, top: 13 },
+				layout: { left: 20, width: 190, bottom: 20, top: 13 },
 				backgroundColor: 'white',
 				contentView: SC.ListView.design({
 					classNames: [ 'history' ],
@@ -139,7 +139,7 @@ SproutSrchr.mainPage = SC.Page.design({
 
 			// This is an area that will contain the results for a give search
 			results: SC.TabView.design({
-				layout: { left: 220, right: 20, bottom: 20, top: 0 },
+				layout: { left: 240, right: 20, bottom: 20, top: 0 },
 				itemTitleKey: 'tab',
 				itemValueKey: 'panel',
 				itemIconKey: 'icon',
