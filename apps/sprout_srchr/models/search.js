@@ -6,7 +6,11 @@
 
 /** @class
 
-  This models represent searches (term + sources)
+  This model represent searches (a search term + sources flags)
+
+  The search term is just a string
+
+  The sources flag is an object (see example below)
 
   @extends SC.Record
   @version 0.1
@@ -32,8 +36,8 @@ SproutSrchr.Search = SC.Record.extend(
 	sources: SC.Record.attr(Object),
 
 	// This is computed property used to display a search term with its selected sources
-	// (Example: "Foo Bar (Y,F)" for searching "Foo Bar" on Yahoo and Flickr
-	statusString: function() {
+	// in a "human readable" way
+	toString: function() {
 		var sources=['twitter','yahoo','flickr','upcoming'], checked=[], last='';
 		for (var i=sources.length; i--; i>=0) {
 			if (this.get('sources')[sources[i]]) {

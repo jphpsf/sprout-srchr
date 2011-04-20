@@ -18,6 +18,8 @@ SproutSrchr.searchController = SC.ArrayController.create(
 
 	// Properties used for value binding with the view
 	searchString: null,
+
+	// TODO: figure out how to use the sources object instead of
 	searchOnTwitter: false,
 	searchOnYahoo: false,
 	searchOnUpcoming: false,
@@ -32,7 +34,7 @@ SproutSrchr.searchController = SC.ArrayController.create(
 		// bound with the text input)
 		term=this.get('searchString');
 
-		// Build the sources object
+		// Build the sources object for the model
 		sources={
 			'twitter': this.get('searchOnTwitter'),
 			'flickr': this.get('searchOnFlickr'),
@@ -46,7 +48,7 @@ SproutSrchr.searchController = SC.ArrayController.create(
 			// The key exists, so retrieve the record to update it
 			search = SproutSrchr.store.find(SproutSrchr.Search, term);
 
-			// Update the sources
+			// We only need to update the sources
 			search.set('sources', sources);
 
 		} else {
@@ -67,7 +69,7 @@ SproutSrchr.searchController = SC.ArrayController.create(
 		return YES;
 	},
 
-	// This action handles the user double clicking on a recent search
+	// This action handles the user double clicking on a recent search from the history
 	loadRecent: function() {
 
 		var selected=this.get('selection').get('firstObject');
@@ -89,8 +91,9 @@ SproutSrchr.searchController = SC.ArrayController.create(
 	startSearch: function() {
 
 		// Update the status bar
+		// TODO: where should that be done?
 		var selected=this.get('selection').get('firstObject');
-		SproutSrchr.statusController.set('notice',selected.get('statusString'));
+		SproutSrchr.statusController.set('notice',selected.get('toString'));
 
 		// Start the search
 		// TODO

@@ -5,27 +5,27 @@
 
 /*globals SproutSrchr Forms*/
 
-// This page describes the main user interface for your application.
+// This page describes the main user interface for this application.
 SproutSrchr.mainPage = SC.Page.design({
 
-	// The main pane is made visible on screen as soon as your app is loaded.
-	// Add childViews to this pane for views to display immediately on page
-	// load.
+	// The main pane is made visible on screen as soon as the app is loaded.
+	// It contains several child views.
 	mainPane: SC.MainPane.design({
 
+		// We have 3 child views:
 		// form is the top area where the user types his query
 		// search is the results area with history on the left and results on the right
 		// status is a status bar for user notices
 		childViews: 'form search status'.w(),
 
-		// The form should include the logo on the left and text input + search
-		// button and checkboxes to pick sources
+		// The form includes the logo on the left and text input + search button
+		// and checkboxes to pick sources on the right
 		form: SC.View.design({
 			layout: { top: 0, left: 0, right: 0, height: 96},
 			childViews: 'logo query sourcePicker'.w(),
 			anchorLocation: SC.ANCHOR_TOP,
 
-			// This will be the area for the title and/or logo
+			// This will be the area for the title and/or logo on the left
 			logo: SC.View.design({
 				layout: { height: 36, left: 30, width: 210, top: 30},
 				classNames: ['logo'],
@@ -63,6 +63,10 @@ SproutSrchr.mainPage = SC.Page.design({
     		}),
 
 			// The list of sources to search from: this is a simple group of checkboxes
+			// TODO: find a way to generate this, maybe a custom view like this:
+			// sourcePicker: SproutSrchr.SourceCheckboxesView.design({
+			//	layout: { height: 40, left: 230, width: 800, top: 56},
+			// })
 			sourcePicker: SC.FormView.design({
 				layout: { height: 40, left: 230, width: 800, top: 56},
 				childViews: 'sources'.w(),
