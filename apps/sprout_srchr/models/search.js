@@ -38,10 +38,10 @@ SproutSrchr.Search = SC.Record.extend(
 	// This is computed property used to display a search term with its selected sources
 	// in a "human readable" way
 	toString: function() {
-		var sources=['twitter','yahoo','flickr','upcoming'], checked=[], last='';
-		for (var i=sources.length; i--; i>=0) {
-			if (this.get('sources')[sources[i]]) {
-				checked.push(sources[i]);
+		var sources=SproutSrchr.sourcesConfig, source, checked=[], last='';
+		for (source in sources) {
+			if (this.get('sources')[source]) {
+				checked.push(sources[source].label);
 			}
 		}
 		if (checked.length>1) {

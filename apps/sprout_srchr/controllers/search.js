@@ -18,29 +18,44 @@ SproutSrchr.searchController = SC.ArrayController.create(
 
 	// Properties used for value binding with the view
 	searchString: null,
+	searchSources: {},
 
-	// TODO: figure out how to use the sources object instead of
-	searchOnTwitter: false,
-	searchOnYahoo: false,
-	searchOnUpcoming: false,
-	searchOnFlickr: false,
+	// Trick: we need to access the searchSources property which is an object
+	// with properties. SC can not do a value binding on a property of an object
+	// so we use unknownProperty to map a non existing property searchSources_foo
+	// to searchSources['foo']
+	unknownProperty: function(key, value) {
+		if (key.slice(0, 13) === 'searchSources') {
+			var source = key.slice(14), sources=this.get('searchSources');
+			if (value!==undefined) {
+				sources[source]=value;
+			}
+			return sources[source];
+		}
+	},
+
+	// This will allow to monitor change on searchSources property
+    searchSourcesDidChange: function() {
+        var sources=SproutSrchr.sourcesConfig;
+        this.beginPropertyChanges();
+		for (source in sources) {
+            this.notifyPropertyChange('searchSources_'+source);
+        }
+        this.endPropertyChanges();
+    }.observes('searchSources'),
 
 	// This action handles the user clicking the 'Find it!' button
 	findIt: function() {
 
-		var term, search, sources;
+		var term, search, sources=SproutSrchr.sourcesConfig, searchSources={};
 
 		// Retrieve the search term (the searchString property was automatically
 		// bound with the text input)
 		term=this.get('searchString');
 
-		// Build the sources object for the model
-		sources={
-			'twitter': this.get('searchOnTwitter'),
-			'flickr': this.get('searchOnFlickr'),
-			'upcoming': this.get('searchOnUpcoming'),
-			'yahoo': this.get('searchOnYahoo')
-		};
+		for (source in sources) {
+			searchSources[source]=this.get('searchSources_'+source);
+		}
 
 		// Does the term already exists?
 		if (SproutSrchr.Search.storeKeyExists(term)) {
@@ -49,14 +64,14 @@ SproutSrchr.searchController = SC.ArrayController.create(
 			search = SproutSrchr.store.find(SproutSrchr.Search, term);
 
 			// We only need to update the sources
-			search.set('sources', sources);
+			search.set('sources', searchSources);
 
 		} else {
 
 			// Otherwise create a new record
 			search = SproutSrchr.store.createRecord(SproutSrchr.Search, {
 				'term': term,
-				'sources': sources
+				'sources': searchSources
 			});
 		}
 
@@ -72,14 +87,15 @@ SproutSrchr.searchController = SC.ArrayController.create(
 	// This action handles the user double clicking on a recent search from the history
 	loadRecent: function() {
 
-		var selected=this.get('selection').get('firstObject');
+		var selected=this.get('selection').get('firstObject'), sources={};
 
 		// Restore the recent search which just got selected
 		this.set('searchString',selected.get('term'));
-		this.set('searchOnTwitter',selected.get('sources')['twitter']);
-		this.set('searchOnFlickr',selected.get('sources')['flickr']);
-		this.set('searchOnUpcoming',selected.get('sources')['upcoming']);
-		this.set('searchOnYahoo',selected.get('sources')['yahoo']);
+		var sources=SproutSrchr.sourcesConfig, searchSources={};
+		for (source in sources) {
+			searchSources[source]=selected.get('sources')[source];
+		}
+		this.set('searchSources',searchSources);
 
 		// Start the search
 		this.startSearch();

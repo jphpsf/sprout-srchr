@@ -63,42 +63,9 @@ SproutSrchr.mainPage = SC.Page.design({
     		}),
 
 			// The list of sources to search from: this is a simple group of checkboxes
-			// TODO: find a way to generate this, maybe a custom view like this:
-			// sourcePicker: SproutSrchr.SourceCheckboxesView.design({
-			//	layout: { height: 40, left: 230, width: 800, top: 56},
-			// })
-			sourcePicker: SC.FormView.design({
+			// See the source for SourceCheckboxesView in views/source_checkboxes.js
+			sourcePicker: SproutSrchr.SourceCheckboxesView.design({
 				layout: { height: 40, left: 230, width: 800, top: 56},
-				childViews: 'sources'.w(),
-
-				sources: SC.FormView.row('',
-					SC.View.design(SC.FlowedLayout, {
-					childViews: 'twitterCheckbox flickrCheckbox yahooCheckbox upcomingCheckbox'.w(),
-					twitterCheckbox: SC.CheckboxView.design({
-						layout: { width: 70, height: 32},
-						title: 'Twitter',
-						controlSize: SC.SMALL_CONTROL_SIZE,
-						valueBinding: 'SproutSrchr.searchController.searchOnTwitter'
-					}),
-					flickrCheckbox: SC.CheckboxView.design({
-						layout: { width: 60, height: 32},
-						title: 'Flickr',
-						controlSize: SC.SMALL_CONTROL_SIZE,
-						valueBinding: 'SproutSrchr.searchController.searchOnFlickr'
-					}),
-					yahooCheckbox: SC.CheckboxView.design({
-						layout: { width: 110, height: 32},
-						title: 'Yahoo! search',
-						controlSize: SC.SMALL_CONTROL_SIZE,
-						valueBinding: 'SproutSrchr.searchController.searchOnYahoo'
-					}),
-					upcomingCheckbox: SC.CheckboxView.design({
-						layout: { width: 120, height: 32},
-						title: 'Upcoming events',
-						controlSize: SC.SMALL_CONTROL_SIZE,
-						valueBinding: 'SproutSrchr.searchController.searchOnUpcoming'
-					})
-				}))
 			})
    		}),
 
@@ -142,6 +109,7 @@ SproutSrchr.mainPage = SC.Page.design({
 		    }),
 
 			// This is an area that will contain the results for a give search
+			// TODO: make this dynamic like the checkboxes
 			results: SC.TabView.design({
 				layout: { left: 240, right: 20, bottom: 20, top: 0 },
 				itemTitleKey: 'tab',

@@ -25,7 +25,7 @@ SproutSrchr.SearchItemView = SC.ListItemView.extend(
 		// instead of duplicating the code
 		var content = this.get('content'),
 			del     = this.displayDelegate,
-			key, value, working, classArray = [], sources, source, icon;
+			key, value, working, classArray = [], contentSources, configSources, source, icon;
 
 		// add alternating row classes
 		classArray.push((this.get('contentIndex')%2 === 0) ? 'even' : 'odd');
@@ -42,11 +42,11 @@ SproutSrchr.SearchItemView = SC.ListItemView.extend(
 
 		// Render the source icons
 		working = context.begin("div").addClass("has-source-icon");
-		sources = content.get('sources');
-		for (source in sources) {
-			if (sources[source]) {
-				// TODO: Figure out how to use static url?
-				icon='/static/sprout_srchr/en/current/source/resources/images/'+source+'-icon.png';
+		contentSources = content.get('sources');
+		configSources=SproutSrchr.sourcesConfig;
+		for (source in configSources) {
+			if (contentSources[source]) {
+				icon=configSources[source].icon;
 				working.begin('img').addClass(['source-icon']).attr('src', icon).end();
 			}
 		}

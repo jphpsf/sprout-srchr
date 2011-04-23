@@ -12,44 +12,29 @@
 
   @extends SC.FormView
 */
-SproutSrchr.SourceCheckboxesView = SC.FormView.extend(
-/** @scope SproutSrchr.SourceCheckboxesView.prototype */ {
+SproutSrchr.SourceCheckboxesView = SC.FormView.extend({
+	childViews: 'sources'.w(),
 
-	init: function() {
-
-		// Generate the childviews
-		this.set('childViews', this.buildChildViews());
-
-		// Go back to the regular workflow
-		sc_super();
-	},
-
-	buildChildViews: function() {
-
-		// We are going to loop on each source known from SproutSrchr.sourcesConfig
-		// (see core.js in root folder)
-		var sources=SproutSrchr.sourcesConfig, checkboxes=[];
-		for (source in sources) {
-			checkboxes.push(
-				SC.CheckboxView.extend({
+	sources: SC.FormView.row('',SC.View.extend(SC.FlowedLayout, {
+		createChildViews: function() {
+			// We are going to loop on each source known from SproutSrchr.sourcesConfig
+			// (see core.js in root folder)
+			var sources=SproutSrchr.sourcesConfig, childViews=[], viewName;
+			for (source in sources) {
+				viewName=source+'CheckboxView';
+				this[viewName]=SC.CheckboxView.design({
 					// The width should be 10px per char from the label
-					layout: { width: 10*sources[source].label.length, height: 32},
+					layout: { width: 12*sources[source].label.length, height: 32},
 					title: sources[source].label,
 					controlSize: SC.SMALL_CONTROL_SIZE,
-					valueBinding: 'SproutSrchr.searchController.searchOnTwitter' // TODO: update this
+					valueBinding: 'SproutSrchr.searchController.searchSources_'+source
 				})
-			)
-		};
+				childViews.push(this[viewName]);
+			};
 
-		// Wrap the checkboxes in a FormView row with a flowed layout
-		var childViews=[
-			SC.FormView.row('',
-				SC.View.extend(SC.FlowedLayout, {
-					childViews: checkboxes
-				})
-			)
-		];
+			this.set('childViews', childViews);
 
-		return childViews;
-	}
+			sc_super();
+		}
+	}))
 });
