@@ -1,12 +1,12 @@
 // ==========================================================================
-// Project:   SproutSrchr.Search Fixtures
-// Copyright: ©2011 My Company, Inc.
+// Project:   SRCHR.Search Fixtures
+// Copyright: ©2011 jphpsf
 // ==========================================================================
-/*globals SproutSrchr */
+/*globals SRCHR */
 
 sc_require('models/search');
 
-SproutSrchr.Search.FIXTURES = [
+SRCHR.Search.FIXTURES = [
 
 	{
 		'term': 'Sproutcore',

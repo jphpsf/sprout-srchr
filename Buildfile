@@ -1,6 +1,6 @@
 # ===========================================================================
-# Project:   SproutSrchr
-# Copyright: ©2011 My Company, Inc.
+# Project:   SRCHR
+# Copyright: ©2011 jphpsf
 # ===========================================================================
 
 # This is your Buildfile, which sets build settings for your project.

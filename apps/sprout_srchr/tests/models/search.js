@@ -1,10 +1,10 @@
 // ==========================================================================
-// Project:   SproutSrchr.Search Unit Test
-// Copyright: ©2011 My Company, Inc.
+// Project:   SRCHR.Search Unit Test
+// Copyright: ©2011 jphpsf
 // ==========================================================================
-/*globals SproutSrchr module test ok equals same stop start */
+/*globals SRCHR module test ok equals same stop start */
 
-module("SproutSrchr.Search");
+module("SRCHR.Search");
 
 // TODO: Replace with real unit test for Search
 test("test description", function() {

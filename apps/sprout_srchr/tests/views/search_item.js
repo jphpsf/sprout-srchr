@@ -1,12 +1,12 @@
 // ==========================================================================
-// Project:   SproutSrchr.SearchItemView Unit Test
-// Copyright: ©2011 My Company, Inc.
+// Project:   SRCHR.SearchItemView Unit Test
+// Copyright: ©2011 jphpsf
 // ==========================================================================
-/*globals SproutSrchr module test ok equals same stop start */
+/*globals SRCHR module test ok equals same stop start */
 
-module("SproutSrchr.SearchItemView");
+module("SRCHR.SearchItemView");
 
-// TODO: Replace with real unit test for SproutSrchr.SearchItemView
+// TODO: Replace with real unit test for SRCHR.SearchItemView
 test("test description", function() {
   var expected = "test";
   var result   = "test";

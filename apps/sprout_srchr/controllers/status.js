@@ -1,8 +1,8 @@
 // ==========================================================================
-// Project:   SproutSrchr.statusController
-// Copyright: ©2011 My Company, Inc.
+// Project:   SRCHR.statusController
+// Copyright: ©2011 jphpsf
 // ==========================================================================
-/*globals SproutSrchr */
+/*globals SRCHR */
 
 /** @class
 
@@ -10,8 +10,8 @@
 
   @extends SC.ObjectController
 */
-SproutSrchr.statusController = SC.ObjectController.create(
-/** @scope SproutSrchr.statusController.prototype */ {
+SRCHR.statusController = SC.ObjectController.create(
+/** @scope SRCHR.statusController.prototype */ {
 
 	// The current notice
 	notice: ''

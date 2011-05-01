@@ -1,8 +1,8 @@
 // ==========================================================================
-// Project:   SproutSrchr.searchController
-// Copyright: ©2011 My Company, Inc.
+// Project:   SRCHR.searchController
+// Copyright: ©2011 jphpsf
 // ==========================================================================
-/*globals SproutSrchr */
+/*globals SRCHR */
 
 /** @class
 
@@ -11,10 +11,10 @@
 
   @extends SC.ArrayController
 */
-SproutSrchr.searchController = SC.ArrayController.create(
+SRCHR.searchController = SC.ArrayController.create(
 
 	SC.CollectionViewDelegate,
-	/** @scope SproutSrchr.searchController.prototype */ {
+	/** @scope SRCHR.searchController.prototype */ {
 
 	// Properties used for value binding with the view
 	searchString: null,
@@ -36,7 +36,7 @@ SproutSrchr.searchController = SC.ArrayController.create(
 
 	// This will allow to monitor change on searchSources property
     searchSourcesDidChange: function() {
-        var sources=SproutSrchr.sourcesConfig;
+        var sources=SRCHR.sourcesConfig;
         this.beginPropertyChanges();
 		for (source in sources) {
             this.notifyPropertyChange('searchSources_'+source);
@@ -47,7 +47,7 @@ SproutSrchr.searchController = SC.ArrayController.create(
 	// This action handles the user clicking the 'Find it!' button
 	findIt: function() {
 
-		var term, search, sources=SproutSrchr.sourcesConfig, searchSources={};
+		var term, search, sources=SRCHR.sourcesConfig, searchSources={};
 
 		// Retrieve the search term (the searchString property was automatically
 		// bound with the text input)
@@ -58,10 +58,10 @@ SproutSrchr.searchController = SC.ArrayController.create(
 		}
 
 		// Does the term already exists?
-		if (SproutSrchr.Search.storeKeyExists(term)) {
+		if (SRCHR.Search.storeKeyExists(term)) {
 
 			// The key exists, so retrieve the record to update it
-			search = SproutSrchr.store.find(SproutSrchr.Search, term);
+			search = SRCHR.store.find(SRCHR.Search, term);
 
 			// We only need to update the sources
 			search.set('sources', searchSources);
@@ -69,7 +69,7 @@ SproutSrchr.searchController = SC.ArrayController.create(
 		} else {
 
 			// Otherwise create a new record
-			search = SproutSrchr.store.createRecord(SproutSrchr.Search, {
+			search = SRCHR.store.createRecord(SRCHR.Search, {
 				'term': term,
 				'sources': searchSources
 			});
@@ -91,7 +91,7 @@ SproutSrchr.searchController = SC.ArrayController.create(
 
 		// Restore the recent search which just got selected
 		this.set('searchString',selected.get('term'));
-		var sources=SproutSrchr.sourcesConfig, searchSources={};
+		var sources=SRCHR.sourcesConfig, searchSources={};
 		for (source in sources) {
 			searchSources[source]=selected.get('sources')[source];
 		}
@@ -109,7 +109,7 @@ SproutSrchr.searchController = SC.ArrayController.create(
 		// Update the status bar
 		// TODO: where should that be done?
 		var selected=this.get('selection').get('firstObject');
-		SproutSrchr.statusController.set('notice',selected.get('toString'));
+		SRCHR.statusController.set('notice',selected.get('toString'));
 
 		// Start the search
 		// TODO

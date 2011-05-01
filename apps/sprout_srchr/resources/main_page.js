@@ -1,12 +1,10 @@
 // ==========================================================================
-// Project:   SproutSrchr - mainPage
-// Copyright: ©2011 My Company, Inc.
+// Project:   SRCHR - mainPage
+// Copyright: ©2011 jphpsf
 // ==========================================================================
 
-/*globals SproutSrchr Forms*/
-
 // This page describes the main user interface for this application.
-SproutSrchr.mainPage = SC.Page.design({
+SRCHR.mainPage = SC.Page.design({
 
 	// The main pane is made visible on screen as soon as the app is loaded.
 	// It contains several child views.
@@ -46,17 +44,17 @@ SproutSrchr.mainPage = SC.Page.design({
 						classNames: ['search'],
 						value: 'Search term',
 						hint: 'Type your search term here and press "Find it!"',
-						valueBinding: 'SproutSrchr.searchController.searchString'
+						valueBinding: 'SRCHR.searchController.searchString'
 					}),
 
-					// This is the search button which on click will call SproutSrchr.searchController.findIt
+					// This is the search button which on click will call SRCHR.searchController.findIt
 					searchButton: SC.ButtonView.design({
 						toolTip: 'Click to search',
 						layout: { width: 60, height: 24},
 						title: 'Find it!',
 						//hasIcon: YES,
 						//icon: 'search'
-						target: 'SproutSrchr.searchController',
+						target: 'SRCHR.searchController',
 						action: 'findIt'
 					})
 				}))
@@ -64,7 +62,7 @@ SproutSrchr.mainPage = SC.Page.design({
 
 			// The list of sources to search from: this is a simple group of checkboxes
 			// See the source for SourceCheckboxesView in views/source_checkboxes.js
-			sourcePicker: SproutSrchr.SourceCheckboxesView.design({
+			sourcePicker: SRCHR.SourceCheckboxesView.design({
 				layout: { height: 40, left: 230, width: 800, top: 56}
 			})
    		}),
@@ -88,12 +86,12 @@ SproutSrchr.mainPage = SC.Page.design({
 					rowHeight: 25,
 
 					// Here we override the default list item rendering and create our own with a custom
-					// view SproutSrchr.SearchItemView (used sc-gen view)
-					exampleView: SproutSrchr.SearchItemView,
+					// view SRCHR.SearchItemView (used sc-gen view)
+					exampleView: SRCHR.SearchItemView,
 
 					// Bind to the search controller to get the content in
-					contentBinding: 'SproutSrchr.searchController.arrangedObjects',
-					selectionBinding: 'SproutSrchr.searchController.selection',
+					contentBinding: 'SRCHR.searchController.arrangedObjects',
+					selectionBinding: 'SRCHR.searchController.selection',
 
 					// This is a computer property that will display a search term with the
 					// associated sources (see model)
@@ -103,7 +101,7 @@ SproutSrchr.mainPage = SC.Page.design({
 					canDeleteContent: YES,
 
 					// On double click we need to use the target selection as our current search
-					target: 'SproutSrchr.searchController',
+					target: 'SRCHR.searchController',
 					action: 'loadRecent'
 				})
 		    }),
@@ -115,12 +113,12 @@ SproutSrchr.mainPage = SC.Page.design({
 				itemTitleKey: 'tab',
 				itemValueKey: 'panel',
 				itemIconKey: 'icon',
-				value: 'SproutSrchr.mainPage.mainPane.search.results.noResults',
+				value: 'SRCHR.mainPage.mainPane.search.results.noResults',
 				items: [
-					{ tab: 'Flickr', icon: static_url('flickr-icon'), panel: 'SproutSrchr.mainPage.mainPane.search.results.flickrResults' },
-					{ tab: 'Yahoo!', icon: static_url('yahoo-icon'), panel: 'SproutSrchr.mainPage.mainPane.search.results.yahooResults' },
-					{ tab: 'Upcoming', icon: static_url('upcoming-icon'), panel: 'SproutSrchr.mainPage.mainPane.search.results.upcomingResults' },
-					{ tab: 'Twitter', icon: static_url('twitter-icon'), panel: 'SproutSrchr.mainPage.mainPane.search.results.twitterResults' }
+					{ tab: 'Flickr', icon: static_url('flickr-icon'), panel: 'SRCHR.mainPage.mainPane.search.results.flickrResults' },
+					{ tab: 'Yahoo!', icon: static_url('yahoo-icon'), panel: 'SRCHR.mainPage.mainPane.search.results.yahooResults' },
+					{ tab: 'Upcoming', icon: static_url('upcoming-icon'), panel: 'SRCHR.mainPage.mainPane.search.results.upcomingResults' },
+					{ tab: 'Twitter', icon: static_url('twitter-icon'), panel: 'SRCHR.mainPage.mainPane.search.results.twitterResults' }
 				],
 				tabLocation: SC.TOP_LOCATION,
 
@@ -165,7 +163,7 @@ SproutSrchr.mainPage = SC.Page.design({
 			status: SC.LabelView.design({
 				layout: { centerY: 0, right:10, left: 10, height:20 },
 				fontWeight: SC.BOLD_WEIGHT,
-				valueBinding: 'SproutSrchr.statusController.notice'
+				valueBinding: 'SRCHR.statusController.notice'
 			})
 		})
 	})

@@ -1,8 +1,8 @@
 // ==========================================================================
-// Project:   SproutSrchr
-// Copyright: ©2011 My Company, Inc.
+// Project:   SRCHR
+// Copyright: ©2011 jphpsf
 // ==========================================================================
-/*globals SproutSrchr */
+/*globals SRCHR */
 
 // This is the function that will start your app running.  The default
 // implementation will load any fixtures you have created then instantiate
@@ -11,22 +11,22 @@
 // As you develop your application you will probably want to override this.
 // See comments for some pointers on what to do next.
 //
-SproutSrchr.main = function main() {
+SRCHR.main = function main() {
 
 	// Step 1: Instantiate Your Views
 	// The default code here will make the mainPane for your application visible
 	// on screen.  If you app gets any level of complexity, you will probably
 	// create multiple pages and panes.
-	SproutSrchr.getPath('mainPage.mainPane').append() ;
+	SRCHR.getPath('mainPage.mainPane').append() ;
 
 	// Step 2. Set the content property on your primary controller.
 	// This will make your app come alive!
-	var searches = SproutSrchr.store.find(SproutSrchr.Search);
-	SproutSrchr.searchController.set('content', searches);
+	var searches = SRCHR.store.find(SRCHR.Search);
+	SRCHR.searchController.set('content', searches);
 
 	// TODO: Set the content property on your primary controller
-	// ex: SproutSrchr.contactsController.set('content',SproutSrchr.contacts);
+	// ex: SRCHR.contactsController.set('content',SRCHR.contacts);
 
 } ;
 
-function main() { SproutSrchr.main(); }
+function main() { SRCHR.main(); }

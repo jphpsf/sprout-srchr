@@ -1,8 +1,8 @@
 // ==========================================================================
-// Project:   SproutSrchr
-// Copyright: ©2011 My Company, Inc.
+// Project:   SRCHR
+// Copyright: ©2011 jphpsf
 // ==========================================================================
-/*globals SproutSrchr */
+/*globals SRCHR */
 
 /** @namespace
 
@@ -12,10 +12,10 @@
 
   @extends SC.Object
 */
-SproutSrchr = SC.Application.create(
-	/** @scope SproutSrchr.prototype */ {
+SRCHR = SC.Application.create(
+	/** @scope SRCHR.prototype */ {
 
-	NAMESPACE: 'SproutSrchr',
+	NAMESPACE: 'SRCHR',
 	VERSION: '0.1.0',
 
 	// This is your application store.  You will use this store to access all

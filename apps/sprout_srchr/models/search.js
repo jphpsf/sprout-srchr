@@ -1,8 +1,8 @@
 // ==========================================================================
-// Project:   SproutSrchr.Search
-// Copyright: ©2011 My Company, Inc.
+// Project:   SRCHR.Search
+// Copyright: ©2011 jphpsf
 // ==========================================================================
-/*globals SproutSrchr */
+/*globals SRCHR */
 
 /** @class
 
@@ -15,8 +15,8 @@
   @extends SC.Record
   @version 0.1
 */
-SproutSrchr.Search = SC.Record.extend(
-/** @scope SproutSrchr.Search.prototype */ {
+SRCHR.Search = SC.Record.extend(
+/** @scope SRCHR.Search.prototype */ {
 
 	// We want to use the search term as the primary key so that we
 	// can easily lookup a term in the history
@@ -38,7 +38,7 @@ SproutSrchr.Search = SC.Record.extend(
 	// This is computed property used to display a search term with its selected sources
 	// in a "human readable" way
 	toString: function() {
-		var sources=SproutSrchr.sourcesConfig, source, checked=[], last='';
+		var sources=SRCHR.sourcesConfig, source, checked=[], last='';
 		for (source in sources) {
 			if (this.get('sources')[source]) {
 				checked.push(sources[source].label);

@@ -1,8 +1,8 @@
 // ==========================================================================
-// Project:   SproutSrchr.SearchItemView
-// Copyright: ©2011 My Company, Inc.
+// Project:   SRCHR.SearchItemView
+// Copyright: ©2011 jphpsf
 // ==========================================================================
-/*globals SproutSrchr */
+/*globals SRCHR */
 
 /** @class
 
@@ -12,8 +12,8 @@
 
   @extends SC.ListItemView
 */
-SproutSrchr.SearchItemView = SC.ListItemView.extend(
-/** @scope SproutSrchr.SearchItemView.prototype */ {
+SRCHR.SearchItemView = SC.ListItemView.extend(
+/** @scope SRCHR.SearchItemView.prototype */ {
 
 	// The 2 model attributes we want to use in this view
 	contentDisplayProperties: 'term sources'.w(),
@@ -43,7 +43,7 @@ SproutSrchr.SearchItemView = SC.ListItemView.extend(
 		// Render the source icons
 		working = context.begin("div").addClass("has-source-icon");
 		contentSources = content.get('sources');
-		configSources=SproutSrchr.sourcesConfig;
+		configSources=SRCHR.sourcesConfig;
 		for (source in configSources) {
 			if (contentSources[source]) {
 				icon=configSources[source].icon;
