@@ -28,7 +28,7 @@ SproutSrchr.mainPage = SC.Page.design({
 			// This will be the area for the title and/or logo on the left
 			logo: SC.View.design({
 				layout: { height: 36, left: 30, width: 210, top: 30},
-				classNames: ['logo'],
+				classNames: ['logo']
 			}),
 
 			// This will be the area where the user types a query and hit search
@@ -65,7 +65,7 @@ SproutSrchr.mainPage = SC.Page.design({
 			// The list of sources to search from: this is a simple group of checkboxes
 			// See the source for SourceCheckboxesView in views/source_checkboxes.js
 			sourcePicker: SproutSrchr.SourceCheckboxesView.design({
-				layout: { height: 40, left: 230, width: 800, top: 56},
+				layout: { height: 40, left: 230, width: 800, top: 56}
 			})
    		}),
 
@@ -120,7 +120,7 @@ SproutSrchr.mainPage = SC.Page.design({
 					{ tab: 'Flickr', icon: static_url('flickr-icon'), panel: 'SproutSrchr.mainPage.mainPane.search.results.flickrResults' },
 					{ tab: 'Yahoo!', icon: static_url('yahoo-icon'), panel: 'SproutSrchr.mainPage.mainPane.search.results.yahooResults' },
 					{ tab: 'Upcoming', icon: static_url('upcoming-icon'), panel: 'SproutSrchr.mainPage.mainPane.search.results.upcomingResults' },
-					{ tab: 'Twitter', icon: static_url('twitter-icon'), panel: 'SproutSrchr.mainPage.mainPane.search.results.twitterResults' },
+					{ tab: 'Twitter', icon: static_url('twitter-icon'), panel: 'SproutSrchr.mainPage.mainPane.search.results.twitterResults' }
 				],
 				tabLocation: SC.TOP_LOCATION,
 
@@ -166,8 +166,8 @@ SproutSrchr.mainPage = SC.Page.design({
 				layout: { centerY: 0, right:10, left: 10, height:20 },
 				fontWeight: SC.BOLD_WEIGHT,
 				valueBinding: 'SproutSrchr.statusController.notice'
-			}),
-		}),
+			})
+		})
 	})
 });
 
