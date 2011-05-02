@@ -53,9 +53,13 @@ SRCHR.searchController = SC.ArrayController.create(
 		// bound with the text input)
 		term=this.get('searchString');
 
+		// Retrieve the search sources
 		for (source in sources) {
 			searchSources[source]=this.get('searchSources_'+source);
 		}
+
+		// Remember the new search sources (so that observers will get notified)
+		this.set('searchSources',searchSources);
 
 		// Does the term already exists?
 		if (SRCHR.Search.storeKeyExists(term)) {
@@ -78,9 +82,6 @@ SRCHR.searchController = SC.ArrayController.create(
 		// Select new search term (this should trigger the search)
 		this.selectObject(search);
 
-		// Start the search
-		this.startSearch();
-
 		return YES;
 	},
 
@@ -97,22 +98,7 @@ SRCHR.searchController = SC.ArrayController.create(
 		}
 		this.set('searchSources',searchSources);
 
-		// Start the search
-		this.startSearch();
-
 		return YES;
-	},
-
-	// Start a search on the currently selected item
-	startSearch: function() {
-
-		// Update the status bar
-		// TODO: where should that be done?
-		var selected=this.get('selection').get('firstObject');
-		SRCHR.statusController.set('notice',selected.get('toString'));
-
-		// Start the search
-		// TODO
 	},
 
 	// This handles the delete behavior when the user hits the delete key
@@ -129,4 +115,4 @@ SRCHR.searchController = SC.ArrayController.create(
 		this.selectObject(this.objectAt(selIndex));
 	}
 
-}) ;
+});

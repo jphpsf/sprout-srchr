@@ -13,7 +13,14 @@
 SRCHR.statusController = SC.ObjectController.create(
 /** @scope SRCHR.statusController.prototype */ {
 
-	// The current notice
-	notice: ''
+	// The current status
+	status: '',
 
-}) ;
+	// Observe the search controller for changes so that we can update the status
+	// if user starts a new search
+	searchControllerQueryDidChange: function() {
+		var selected=SRCHR.searchController.get('selection').get('firstObject');
+		this.set('status',selected.get('toString'));
+	}.observes('SRCHR.searchController.searchSources')
+
+});

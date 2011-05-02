@@ -163,7 +163,7 @@ SRCHR.mainPage = SC.Page.design({
 			status: SC.LabelView.design({
 				layout: { centerY: 0, right:10, left: 10, height:20 },
 				fontWeight: SC.BOLD_WEIGHT,
-				valueBinding: 'SRCHR.statusController.notice'
+				valueBinding: 'SRCHR.statusController.status'
 			})
 		})
 	})
